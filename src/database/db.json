@@ -1,0 +1,171 @@
+{
+  "loginuser": [
+    {
+      "email": "suhanishinde2509@gmail.com",
+      "password": "Suhani"
+    }
+  ],
+  "card": [
+    {
+      "id": 1,
+      "image": "/assests/images/Card/lipstick.jpg",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 2,
+      "image": "/assests/images/Card/eyeshadow.jpg",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 3,
+      "image": "/assests/images/Card/primer.jpg",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 4,
+      "image": "/assests/images/Card/swiss.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 5,
+      "image": "/assests/images/Card/toner.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 6,
+      "image": "/assests/images/Card/primer.jpg",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    }
+  ],
+  "about": [
+    {
+      "info": "Since our launch, we have not only redefined the art of e-retailing beauty and personal care in India, but also have been instrumental in fostering the growth of a previously relatively nascent ecosystem. From bringing you domestic brands, international brands, luxury and prestige brands, premium brands, niche and cult brands and expert advice and videos, coupled with our understanding of the needs and preferences of the consumers,to more than 72 Luxe and On-Trend and Kiosk Stores, an ever growing online community for beauty buffs, and a Beauty Helpline, we go out of our way to give you only the very best. With 2400+, 100% authentic brands Beauty Blossom offers a well curated comprehensive selection of makeup, skincare, haircare, bath and body, fragrance, grooming appliances, personal care, and health and wellness categories."
+    }
+  ],
+  "lipstick": [
+    {
+      "id": 1,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 2,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 3,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 4,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 5,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 6,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 7,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 8,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    }
+  ],
+  "userdashboard": [
+    {
+      "id": 1,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 1,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 1,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 8,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    },
+    {
+      "id": 1,
+      "image": "/assests/images/lipstick/mars.avif",
+      "description": "Long-wear liquid lipstick with bold color payoff",
+      "price": 499,
+      "originalPrice": 599,
+      "discount": 15
+    }
+  ]
+}
