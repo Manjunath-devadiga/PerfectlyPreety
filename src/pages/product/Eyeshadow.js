@@ -1,55 +1,57 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Footer from "../../components/common/Footer";
-import Navbar from "../../components/common/Navbar";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import Navbar from '../../components/common/Navbar'
+import Footer from '../../components/common/Footer'
 
-const Lipstick = () => {
-  const [lipstickData, setLipstickData] = useState([]);
-  
-  useEffect(() => {
-    axios.get("http://localhost:8888/lipstick").then((res) => {
-      setLipstickData(res.data);
-    });
-  }, []);
 
-  const handleAddToCart = (product) => {
-    axios
-      .post(`http://localhost:8888/userdashboard`, product)
-      .then((res) => {
-        alert("Product added successfully");
-      })
-      .catch((err) => {
-        console.error("Add to Cart Error:", err);
-        alert("Failed to add product");
-      });
-  };
 
-  return (
-    <div style={{ backgroundColor: "rgb(255 24 24 / 32%)" }}>
-      <Navbar />
+const Eyeshadow = () => {
+
+  const [eyeshadowdata,seteyeshadowdata] = useState([])
+
+  useEffect(()=>{
+    axios.get("http://localhost:8888/Eyeshadow").then((res)=>{
+      seteyeshadowdata(res.data);
+    })
+  },[])
+   
+  const handlecart = (product) => {
+      axios
+        .post(`http://localhost:8888/userdashboard`, product)
+        .then((res) => {
+          alert("Product added successfully");
+        })
+        .catch((err) => {
+          console.error("Add to Cart Error:", err);
+          alert("Failed to add product");
+        });
+      }
+    return (
+        <div style={{backgroundColor:"#f3e5f5 "}}>
+       <Navbar/>
       <img
-        src="/assests/images/lipstick/lipstickbg.avif"
+        src='/assests/images/eyeshadow/Eyeshadowbg.webp'
         className="w-100 d-block"
         alt="Lipstick Banner"
       />
 
       <div className="container mt-5">
-        <h3 className="text-center mb-4">All Products</h3>
+        <h3 className="text-center mb-4">EYESHADOW PRODUCTS</h3>
 
         <div className="row g-4 justify-content-center">
-          {lipstickData.map((item) => (
+          {eyeshadowdata.map((item) => (
             <div className="col-md-3" key={item.id}>
               <div className="card border-0 p-0">
                 <img
                   src={item.image}
                   className="card-img-top"
                   alt={item.description}
-                  style={{height: "220px", objectFit:"cover"}}
+                  style={{ height: "220px", objectFit: "cover" }}
                 />
                 <div className="card-body p-2">
                   <p
                     className="text-center"
-                    style={{fontSize: "15px", fontWeight: "300"}}
+                    style={{ fontSize: "15px", fontWeight: "300" }}
                   >
                     {item.description}
                   </p>
@@ -69,9 +71,10 @@ const Lipstick = () => {
                       style={{
                         backgroundColor: "rgb(209 0 118)",
                         color: "white",
+                      
                       }}
-                      onClick={() => handleAddToCart(item)}
-                    >
+                      onClick={()=>handlecart(item)}
+                      >
                       Add to Cart
                     </button>
                   </div>
@@ -81,16 +84,10 @@ const Lipstick = () => {
           ))}
         </div>
       </div>
-
-      {/* <img
-        src="/assests/images/lipstick/lipstickbg.avif"
-        className="w-100 d-block"
-        alt="Lipstick Banner"
-      /> */}
-
-      <Footer />
+      <Footer/>
+       
     </div>
-  );
-};
+    )
+}
 
-export default Lipstick;
+export default Eyeshadow
