@@ -9,7 +9,7 @@ const Loginform = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    axios.get("hhttp://localhost:8888/loginuser").then((res) => {
+    axios.get("http://localhost:8888/loginuser").then((res) => {
       setuserdata(res.data)
     }).catch((err) => {
       console.log("Error handle = ", err)
@@ -35,8 +35,9 @@ const Loginform = () => {
 
   return (
     <div style={{
-      backgroundImage: `url('/assets/images/background/cosmetics-bg.jpg')`,
-      backgroundSize: 'cover',
+      backgroundImage:'url("/assests/images/Card/loginbg.avif")',
+      backgroundBlendMode:"screen",
+      backgroundSize: 'cover ',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       minHeight: '100vh',
