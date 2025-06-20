@@ -368,22 +368,6 @@
       "discount": 15
     },
     {
-      "id": "3",
-      "image": "/assests/images/blush/lakmeblush.webp",
-      "description": "Lakme Natural Blush",
-      "price": 562,
-      "originalPrice": 749,
-      "discount": 25
-    },
-    {
-      "id": "2",
-      "image": "/assests/images/blush/maybellineblush.webp",
-      "description": "Maybelline new york blush",
-      "price": 849,
-      "originalPrice": 899,
-      "discount": 15
-    },
-    {
       "id": "1",
       "image": "  /assests/images/foundation/kayfoundation.avif",
       "description": "Kay Beauty hydrating rich foundation",
@@ -406,6 +390,14 @@
       "price": 999,
       "originalPrice": 599,
       "discount": 30
+    },
+    {
+      "id": "2",
+      "image": "/assests/images/eyeshadow/swissbeautyultimate.webp",
+      "description": "Swiss Beauty Ultimate Eyeshadow Palette Kit – Multi ",
+      "price": 383,
+      "originalPrice": 425,
+      "discount": 10
     }
   ]
 }
