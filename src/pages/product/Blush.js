@@ -1,36 +1,53 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../../components/common/Navbar'
-import axios from 'axios'
-import Footer from '../../components/common/Footer'
+import React, { useEffect, useState } from "react";
+import Navbar from "../../components/common/Navbar";
+import axios from "axios";
+import Footer from "../../components/common/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Blush = () => {
+  const [blushdata, setBlushData] = useState([]);
+  const [addedToCart, setAddedToCart] = useState({});
+  const navigate = useNavigate();
 
-  const [blushdata,setblushdata] = useState([])
+  // Fetch blush product list
+  useEffect(() => {
+    axios.get("http://localhost:8888/Foundation").then((res) => {
+      setBlushData(res.data);
+    });
+  }, []);
 
-  useEffect(()=>{
-    axios.get("http://localhost:8888/Foundation").then((res)=>{
-      setblushdata(res.data);
-    })
-  },[])
-   
+  // Fetch existing cart items on mount
+  useEffect(() => {
+    axios.get("http://localhost:8888/userdashboard").then((res) => {
+      const existingItems = res.data;
+      const cartMap = {};
+      existingItems.forEach((item) => {
+        cartMap[item.id] = true;
+      });
+      setAddedToCart(cartMap);
+    });
+  }, []);
+
   const handlecart = (product) => {
-      axios
-        .post(`http://localhost:8888/userdashboard`, product)
-        .then((res) => {
-          alert("Product added successfully");
-        })
-        .catch((err) => {
-          console.error("Add to Cart Error:", err);
-          alert("Failed to add product");
-        });
-      }
-    return (
-        <div style={{ backgroundColor: "rgb(255 24 24 / 32%)" }}>
-      <Navbar/>
+    axios
+      .post(`http://localhost:8888/userdashboard`, product)
+      .then(() => {
+        setAddedToCart((prev) => ({ ...prev, [product.id]: true }));
+        alert("Product added successfully");
+      })
+      .catch((err) => {
+        console.error("Add to Cart Error:", err);
+        alert("Failed to add product");
+      });
+  };
+
+  return (
+    <div style={{ backgroundColor: "rgb(255 24 24 / 32%)" }}>
+      <Navbar />
       <img
-        src='/assests/images/blush/blushbg.webp'
+        src="/assests/images/blush/blushbg.webp"
         className="w-100 d-block"
-        alt="Lipstick Banner"
+        alt="Blush Banner"
       />
 
       <div className="container mt-5">
@@ -64,17 +81,25 @@ const Blush = () => {
                     {item.discount}% off
                   </h6>
                   <div className="text-center mt-2">
-                    <button
-                      className="btn"
-                      style={{
-                        backgroundColor: "rgb(209 0 118)",
-                        color: "white",
-                      
-                      }}
-                      onClick={()=>handlecart(item)}
+                    {addedToCart[item.id] ? (
+                      <button
+                        className="btn btn-outline-success"
+                        onClick={() => navigate("/usercart")}
                       >
-                      Add to Cart
-                    </button>
+                        Go to Cart
+                      </button>
+                    ) : (
+                      <button
+                        className="btn"
+                        style={{
+                          backgroundColor: "rgb(209 0 118)",
+                          color: "white",
+                        }}
+                        onClick={() => handlecart(item)}
+                      >
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -83,18 +108,16 @@ const Blush = () => {
         </div>
       </div>
 
-      <img 
-      style={{marginTop:"30px"}}
+      <img
+        style={{ marginTop: "30px" }}
         src="/assests/images/blush/blushbg2.avif"
         className="w-100 d-block"
-        alt="Lipstick Banner"
+        alt="Blush Banner 2"
       />
 
-      
-
-      <Footer/>
+      <Footer />
     </div>
-    )
-}
+  );
+};
 
-export default Blush
+export default Blush;

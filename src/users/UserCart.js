@@ -2,42 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const UserCart = () => {
-  const [userdashboard, setUserDashboard] = useState([]); // To store the fetched cart items
-  const [quantities, setQuantities] = useState({}); //To manage quantity of each item
+  const [userdashboard, setUserDashboard] = useState([]);
+  const [quantities, setQuantities] = useState({});
 
-  useEffect(() => {
-    fetchCartData();
-  }, []);
-
-  const fetchCartData = () => {
+  const FetchData = () => {
     axios.get("http://localhost:8888/userdashboard").then((res) => {
       setUserDashboard(res.data);
-      const initialQuantities = {}; //empty object to store initial quantities for each product.
-      res.data.forEach((item) => {
-        initialQuantities[item.id] = 1;
-      });
-      setQuantities(initialQuantities);
     });
   };
 
+  useEffect(() => {
+    FetchData();
+  }, []);
+
   const handleQuantityChange = (id, newQty) => {
+    const qty = Math.max(Number(newQty), 1);
     setQuantities((prev) => ({
       ...prev,
-      [id]: Math.max(Number(newQty), 1),
-    }));
-  };
-
-  const handleIncrement = (id) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: prev[id] + 1,
-    }));
-  };
-
-  const handleDecrement = (id) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: Math.max(prev[id] - 1, 1),
+      [id]: qty,
     }));
   };
 
@@ -46,10 +28,10 @@ const UserCart = () => {
       axios
         .delete(`http://localhost:8888/userdashboard/${id}`)
         .then(() => {
-          setUserDashboard((prev) => prev.filter((item) => item.id !== id));
           const updatedQuantities = { ...quantities };
           delete updatedQuantities[id];
           setQuantities(updatedQuantities);
+          setUserDashboard((prev) => prev.filter((item) => item.id !== id));
         })
         .catch((err) => {
           console.error("Delete failed:", err);
@@ -77,9 +59,7 @@ const UserCart = () => {
         <tbody>
           {userdashboard.map((item, index) => {
             const qty = quantities[item.id] || 1;
-            console.log(qty);
             const total = item.price * qty;
-            console.log(total);
 
             return (
               <tr key={item.id}>
@@ -94,30 +74,16 @@ const UserCart = () => {
                 </td>
                 <td>₹{item.price}</td>
                 <td>
-                  <div className="d-flex justify-content-center align-items-center">
-                    <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => handleDecrement(item.id)}
-                    >
-                      −
-                    </button>
-                    <input
-                      type="number"
-                      value={qty}
-                      min="1"
-                      onChange={(e) =>
-                        handleQuantityChange(item.id, e.target.value)
-                      }
-                      className="form-control text-center mx-2"
-                      style={{ width: "60px" }}
-                    />
-                    <button
-                      className="btn btn-outline-secondary btn-sm"
-                      onClick={() => handleIncrement(item.id)}
-                    >
-                      +
-                    </button>
-                  </div>
+                  <input
+                    type="number"
+                    value={qty}
+                    min="1"
+                    onChange={(e) =>
+                      handleQuantityChange(item.id, e.target.value)
+                    }
+                    className="form-control text-center mx-auto"
+                    style={{ width: "70px" }}
+                  />
                 </td>
                 <td>₹{total}</td>
                 <td>

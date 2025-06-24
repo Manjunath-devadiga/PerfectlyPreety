@@ -1,35 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Navbar from '../../components/common/Navbar'
-import Footer from '../../components/common/Footer'
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Navbar from "../../components/common/Navbar";
+import Footer from "../../components/common/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Foundation = () => {
+  const [foundationdata, setfoundationdata] = useState([]);
+  const [addedToCart, setAddedToCart] = useState({});
+  const navigate = useNavigate();
 
-  const [foundationdata,setfoundationdata] = useState([])
-
-  useEffect(()=>{
-    axios.get("http://localhost:8888/Foundation").then((res)=>{
+  useEffect(() => {
+    axios.get("http://localhost:8888/Foundation").then((res) => {
       setfoundationdata(res.data);
-    })
-  },[])
-   
+    });
+  }, []);
+
+  // Fetch existing cart items on mount
+  useEffect(() => {
+    axios.get("http://localhost:8888/userdashboard").then((res) => {
+      const existingItems = res.data;
+      const cartMap = {};
+      existingItems.forEach((item) => {
+        cartMap[item.id] = true;
+      });
+      setAddedToCart(cartMap);
+    });
+  }, []);
+
   const handlecart = (product) => {
-      axios
-        .post(`http://localhost:8888/userdashboard`, product)
-        .then((res) => {
-          alert("Product added successfully");
-        })
-        .catch((err) => {
-          console.error("Add to Cart Error:", err);
-          alert("Failed to add product");
-        });
-      }
-    return (
-        <div style={{backgroundColor:"#fff9c48c"}}>
-      <Navbar/>
+    axios
+      .post(`http://localhost:8888/userdashboard`, product)
+      .then((res) => {
+        alert("Product added successfully");
+      })
+      .catch((err) => {
+        console.error("Add to Cart Error:", err);
+        alert("Failed to add product");
+      });
+  };
+  return (
+    <div style={{ backgroundColor: "#fff9c48c" }}>
+      <Navbar />
       <img
-        src='/assests/images/foundation/foundationbg.avif'
+        src="/assests/images/foundation/foundationbg.avif"
         className="w-100 d-block"
         alt="Lipstick Banner"
       />
@@ -65,16 +78,25 @@ const Foundation = () => {
                     {item.discount}% off
                   </h6>
                   <div className="text-center mt-2">
-                    <button
-                      className="btn"
-                      style={{
-                        backgroundColor: "rgb(209 0 118)",
-                        color: "white",
-                      }}
-                      onClick={()=>handlecart(item)}
+                    {addedToCart[item.id] ? (
+                      <button
+                        className="btn btn-outline-success"
+                        onClick={() => navigate("/usercart")}
                       >
-                      Add to Cart
-                    </button>
+                        Go to Cart
+                      </button>
+                    ) : (
+                      <button
+                        className="btn"
+                        style={{
+                          backgroundColor: "rgb(209 0 118)",
+                          color: "white",
+                        }}
+                        onClick={() => handlecart(item)}
+                      >
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -83,9 +105,9 @@ const Foundation = () => {
         </div>
       </div>
 
-       <Footer/>
+      <Footer />
     </div>
-    )
-}
+  );
+};
 
-export default Foundation
+export default Foundation;

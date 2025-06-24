@@ -2,15 +2,30 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../../components/common/Footer";
 import Navbar from "../../components/common/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Lipstick = () => {
   const [lipstickData, setLipstickData] = useState([]);
+  const [addedToCart, setAddedToCart] = useState({});
+  const navigate = useNavigate();
   
   useEffect(() => {
     axios.get("http://localhost:8888/lipstick").then((res) => {
       setLipstickData(res.data);
     });
   }, []);
+
+  useEffect(()=>{
+    axios.get("http://localhost:8888/userdashboard").then((res)=>{
+      const existingItems = res.data
+      const cartMap = {}
+      existingItems.forEach((item) => {
+        cartMap[item.id] = true
+      });
+      setAddedToCart(cartMap)
+    });
+
+  },[])
 
   const handleAddToCart = (product) => {
     axios
@@ -44,12 +59,12 @@ const Lipstick = () => {
                   src={item.image}
                   className="card-img-top"
                   alt={item.description}
-                  style={{height: "220px", objectFit:"cover"}}
+                  style={{ height: "220px", objectFit: "cover" }}
                 />
                 <div className="card-body p-2">
                   <p
                     className="text-center"
-                    style={{fontSize: "15px", fontWeight: "300"}}
+                    style={{ fontSize: "15px", fontWeight: "300" }}
                   >
                     {item.description}
                   </p>
@@ -64,16 +79,25 @@ const Lipstick = () => {
                     {item.discount}% off
                   </h6>
                   <div className="text-center mt-2">
-                    <button
-                      className="btn"
-                      style={{
-                        backgroundColor: "rgb(209 0 118)",
-                        color: "white",
-                      }}
-                      onClick={() => handleAddToCart(item)}
-                    >
-                      Add to Cart
-                    </button>
+                    {addedToCart[item.id] ? (
+                      <button
+                        className="btn btn-outline-danger"
+                        onClick={() => navigate("/usercart")}
+                      >
+                        Go to Cart
+                      </button>
+                    ) : (
+                      <button
+                        className="btn"
+                        style={{
+                          backgroundColor: "rgb(209 0 118)",
+                          color: "white",
+                        }}
+                        onClick={() => handleAddToCart(item)}
+                      >
+                        Add to Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
